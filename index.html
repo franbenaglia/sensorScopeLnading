@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SensorScope – Phone sensor charts, recording and FFT</title>
+    <meta name="title-en" content="SensorScope – Phone sensor charts, recording and FFT" />
+    <meta name="title-es" content="SensorScope – Gráficos, registro y FFT de los sensores del teléfono" />
+    <meta
+      name="description"
+      content="See, record and analyse your Android phone's motion sensors: live charts, statistics, FFT spectrum and CSV export. Works fully offline, with no account and no ads."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="icon.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <a class="brand" href="./"><img src="icon.png" alt="" />SensorScope</a>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" value="en" aria-pressed="true">English</button>
+          <button type="button" value="es" aria-pressed="false">Español</button>
+        </div>
+      </header>
+
+      <main>
+        <img
+          class="banner"
+          src="img/feature.jpg"
+          width="1024"
+          height="500"
+          alt="SensorScope: explore every sensor. Real-time data, live charts, 100% offline."
+        />
+
+        <div class="hero">
+          <div>
+            <h1>
+              <span data-lang="en">See what your phone's sensors really measure</span>
+              <span data-lang="es">Mirá lo que realmente miden los sensores de tu teléfono</span>
+            </h1>
+            <p class="lead">
+              <span data-lang="en">
+                SensorScope charts the accelerometer, gyroscope and magnetometer of your Android
+                phone live, records every measurement, and analyses it with statistics and an FFT
+                spectrum. No account, no ads, no internet.
+              </span>
+              <span data-lang="es">
+                SensorScope grafica en vivo el acelerómetro, el giroscopio y el magnetómetro de tu
+                teléfono Android, guarda cada medición y la analiza con estadísticas y un espectro
+                FFT. Sin cuenta, sin anuncios, sin internet.
+              </span>
+            </p>
+            <span class="badge">
+              <span data-lang="en">Coming soon to Google Play</span>
+              <span data-lang="es">Próximamente en Google Play</span>
+            </span>
+            <ul class="facts">
+              <li>
+                <span data-lang="en">Android 7 or later</span>
+                <span data-lang="es">Android 7 o superior</span>
+              </li>
+              <li>
+                <span data-lang="en">Works offline</span>
+                <span data-lang="es">Funciona sin conexión</span>
+              </li>
+              <li>
+                <span data-lang="en">English and Spanish</span>
+                <span data-lang="es">Español e inglés</span>
+              </li>
+            </ul>
+          </div>
+          <div class="phone">
+            <img
+              src="img/live.png"
+              width="480"
+              height="965"
+              alt="Live chart of the accelerometer with the X, Y, Z and magnitude traces and the pause and stop buttons"
+            />
+          </div>
+        </div>
+
+        <section>
+          <h2>
+            <span data-lang="en">What it does</span>
+            <span data-lang="es">Qué hace</span>
+          </h2>
+          <div class="grid">
+            <div class="card">
+              <h3>
+                <span data-lang="en">Live charts</span>
+                <span data-lang="es">Gráficos en vivo</span>
+              </h3>
+              <p>
+                <span data-lang="en">
+                  X, Y, Z and vector magnitude of the accelerometer, linear acceleration, gyroscope
+                  and magnetometer, at the fastest rate your phone allows. Short peaks are never
+                  averaged away.
+                </span>
+                <span data-lang="es">
+                  X, Y, Z y magnitud vectorial del acelerómetro, la aceleración lineal, el
+                  giroscopio y el magnetómetro, a la frecuencia más alta que permita tu teléfono.
+                  Los picos breves nunca se pierden en un promedio.
+                </span>
+              </p>
+            </div>
+            <div class="card">
+              <h3>
+                <span data-lang="en">The real sampling rate</span>
+                <span data-lang="es">La frecuencia real</span>
+              </h3>
+              <p>
+                <span data-lang="en">
+                  Android rarely delivers exactly the rate you ask for. SensorScope measures the
+                  effective rate, the shortest and longest interval and the jitter from the sensor's
+                  own timestamps.
+                </span>
+                <span data-lang="es">
+                  Android casi nunca entrega exactamente la frecuencia pedida. SensorScope mide la
+                  frecuencia efectiva, el intervalo mínimo y máximo y el jitter con los timestamps
+                  del propio sensor.
+                </span>
+              </p>
+            </div>
+            <div class="card">
+              <h3>
+                <span data-lang="en">FFT spectrum</span>
+                <span data-lang="es">Espectro FFT</span>
+              </h3>
+              <p>
+                <span data-lang="en">
+                  Amplitude spectrum of any channel with the three strongest frequencies, the
+                  spectral resolution and the Nyquist limit, live or on a saved session.
+                </span>
+                <span data-lang="es">
+                  Espectro de amplitud de cualquier canal con las tres frecuencias principales, la
+                  resolución espectral y el límite de Nyquist, en vivo o sobre una sesión guardada.
+                </span>
+              </p>
+            </div>
+            <div class="card">
+              <h3>
+                <span data-lang="en">Sessions and statistics</span>
+                <span data-lang="es">Sesiones y estadísticas</span>
+              </h3>
+              <p>
+                <span data-lang="en">
+                  Every measurement is saved with minimum, maximum, mean, RMS, standard deviation
+                  and peak-to-peak per channel. Add markers while you measure and compare two
+                  sessions side by side.
+                </span>
+                <span data-lang="es">
+                  Cada medición se guarda con mínimo, máximo, media, RMS, desviación estándar y pico
+                  a pico por canal. Agregá marcadores mientras medís y compará dos sesiones.
+                </span>
+              </p>
+            </div>
+            <div class="card">
+              <h3>
+                <span data-lang="en">CSV export</span>
+                <span data-lang="es">Exportación CSV</span>
+              </h3>
+              <p>
+                <span data-lang="en">
+                  Share a session as a CSV file with every original sample, its timestamp and the
+                  measurement details, ready for a spreadsheet, Python or MATLAB.
+                </span>
+                <span data-lang="es">
+                  Compartí una sesión como archivo CSV con todas las muestras originales, su
+                  timestamp y los datos de la medición, lista para una planilla, Python o MATLAB.
+                </span>
+              </p>
+            </div>
+            <div class="card">
+              <h3>
+                <span data-lang="en">Private by design</span>
+                <span data-lang="es">Privada por diseño</span>
+              </h3>
+              <p>
+                <span data-lang="en">
+                  No account, no ads, no analytics and no server. The app does not even ask for
+                  internet access: everything stays on your phone.
+                </span>
+                <span data-lang="es">
+                  Sin cuenta, sin anuncios, sin analíticas y sin servidor. La app ni siquiera pide
+                  acceso a internet: todo queda en tu teléfono.
+                </span>
+                <a href="privacy.html">
+                  <span data-lang="en">Privacy policy</span>
+                  <span data-lang="es">Política de privacidad</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>
+            <span data-lang="en">Screens</span>
+            <span data-lang="es">Pantallas</span>
+          </h2>
+          <p>
+            <span data-lang="en">Real screenshots of the app, shown here with the Spanish interface.</span>
+            <span data-lang="es">Capturas reales de la app.</span>
+          </p>
+          <div class="shots">
+            <figure>
+              <div class="phone">
+                <img src="img/spectrum.png" width="480" height="965" loading="lazy" alt="FFT spectrum with a sharp peak near 174 Hz and the list of the three main frequencies" />
+              </div>
+              <figcaption>
+                <span data-lang="en">FFT spectrum while the phone's own motor vibrates</span>
+                <span data-lang="es">Espectro FFT mientras vibra el motor del propio teléfono</span>
+              </figcaption>
+            </figure>
+            <figure>
+              <div class="phone">
+                <img src="img/session.png" width="480" height="965" loading="lazy" alt="Saved session with its full chart, showing a burst of vibration at the start, and the session details" />
+              </div>
+              <figcaption>
+                <span data-lang="en">A saved session with its full chart</span>
+                <span data-lang="es">Una sesión guardada con su gráfico completo</span>
+              </figcaption>
+            </figure>
+            <figure>
+              <div class="phone">
+                <img src="img/compare.png" width="480" height="965" loading="lazy" alt="Comparison of two sessions: a table with RMS, peak and dominant frequency and the two spectra overlaid" />
+              </div>
+              <figcaption>
+                <span data-lang="en">Two sessions compared</span>
+                <span data-lang="es">Dos sesiones comparadas</span>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section>
+          <h2>
+            <span data-lang="en">Good to know</span>
+            <span data-lang="es">Para tener en cuenta</span>
+          </h2>
+          <div class="note">
+            <p data-lang="en">
+              A phone is not a calibrated instrument. Results change from one device to another and
+              with the case and the way the phone is held or mounted. SensorScope shows measurable
+              differences only: a dominant frequency does not identify a fault by itself. Do not
+              use it for industrial safety, as a medical device or as certified diagnostic
+              equipment.
+            </p>
+            <p data-lang="es">
+              Un teléfono no es un instrumento calibrado. Los resultados cambian de un dispositivo a
+              otro y según la funda y la forma de sujetarlo o apoyarlo. SensorScope solo muestra
+              diferencias medibles: una frecuencia dominante no identifica por sí sola una falla.
+              No la uses para seguridad industrial, ni como dispositivo médico o equipo de
+              diagnóstico certificado.
+            </p>
+          </div>
+          <p>
+            <span data-lang="en">
+              Which sensors are available and how fast they can be read depends on your phone. The
+              app lists what your device has and its declared limits. Measurement runs only while
+              the app is on screen.
+            </span>
+            <span data-lang="es">
+              Qué sensores hay y a qué velocidad se pueden leer depende de tu teléfono. La app lista
+              lo que tiene tu dispositivo y sus límites declarados. La medición funciona solo
+              mientras la app está en pantalla.
+            </span>
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>
+          <a href="privacy.html">
+            <span data-lang="en">Privacy policy</span>
+            <span data-lang="es">Política de privacidad</span>
+          </a>
+          ·
+          <span data-lang="en">Contact:</span><span data-lang="es">Contacto:</span>
+          <a href="mailto:feedback@fab-apps.com">feedback@fab-apps.com</a>
+        </p>
+        <p data-lang="en">
+          The banner at the top is an illustration, not a screenshot of the app. Android and Google
+          Play are trademarks of Google LLC.
+        </p>
+        <p data-lang="es">
+          La imagen superior es una ilustración, no una captura de la app. Android y Google Play son
+          marcas de Google LLC.
+        </p>
+      </footer>
+    </div>
+    <script src="lang.js"></script>
+  </body>
+</html>
