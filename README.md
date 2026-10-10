@@ -25,7 +25,7 @@ Cada texto está dos veces, marcado con `data-lang="en"` y `data-lang="es"`. Se 
 
 1. Subir estos archivos a la rama `main` de `franbenaglia/sensorScopeLnading`.
 2. En GitHub: Settings → Pages → Source: «Deploy from a branch», rama `main`, carpeta `/ (root)`.
-3. El sitio queda en `https://franbenaglia.github.io/sensorScopeLnading/` y la política en `https://franbenaglia.github.io/sensorScopeLnading/privacy.html`.
+3. El sitio queda en `https://sensorscope.fab-apps.com/` (dominio propio, archivo `CNAME`) y la política en `https://sensorscope.fab-apps.com/privacy.html`. La dirección `franbenaglia.github.io/sensorScopeLnading/` redirige allí.
 
 ## Publicar una versión nueva del APK
 
