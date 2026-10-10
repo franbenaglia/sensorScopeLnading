@@ -27,11 +27,23 @@ Cada texto está dos veces, marcado con `data-lang="en"` y `data-lang="es"`. Se 
 2. En GitHub: Settings → Pages → Source: «Deploy from a branch», rama `main`, carpeta `/ (root)`.
 3. El sitio queda en `https://franbenaglia.github.io/sensorScopeLnading/` y la política en `https://franbenaglia.github.io/sensorScopeLnading/privacy.html`.
 
+## Publicar una versión nueva del APK
+
+El APK se distribuye con GitHub Releases de **este** repositorio (es público; el de la app es privado).
+
+1. En el repositorio de la app: subir `versionCode` en `android/app/build.gradle` y `version` en `package.json`, y generar el APK firmado con `npm run android:release` (necesita `android/keystore.properties` y el `.jks`, que no están en ningún repositorio).
+2. Copiar `android/app/build/outputs/apk/release/app-release.apk` como `SensorScope.apk` (el nombre debe ser siempre ese).
+3. `gh release create vX.Y.Z SensorScope.apk -R franbenaglia/sensorScopeLnading --title "SensorScope X.Y.Z" --notes-file notas.md`
+4. Actualizar en `index.html` la versión y el tamaño que figuran bajo el botón.
+
+Todas las versiones deben firmarse con la misma clave: si cambia, Android no deja actualizar sobre la instalación anterior.
+
 ## Qué revisar antes de publicar la app
 
 - La política nombra el paquete `com.sensorscope.app` y al desarrollador como `franbenaglia`; actualizar si cambian.
 - El contacto es `feedback@fab-apps.com`, en el pie de la landing y en la política.
-- El botón «Próximamente en Google Play» no tiene enlace. Cuando exista la ficha, reemplazarlo por el enlace; cuando se publique el APK para descarga directa, agregar ahí el enlace de descarga.
+- El botón «Descargar el APK» apunta a `releases/latest/download/SensorScope.apk`: siempre baja el APK de la última versión publicada, sin tocar la página. La versión y el tamaño que figuran debajo del botón sí están escritos a mano en `index.html`.
+- «Próximamente en Google Play» es solo texto; cuando exista la ficha, convertirlo en enlace.
 - La política afirma que la app no pide el permiso de internet y que su único permiso es el de sensores a alta frecuencia. Si la app agrega red, permisos, anuncios o analíticas, o cambia qué guarda, hay que actualizar `privacy.html` y su fecha.
 - La sección «Copias de seguridad» vale mientras el manifiesto de la app tenga `android:allowBackup="true"`.
 - El banner (`img/feature.jpg`) es una ilustración: muestra orientación, luz y proximidad, que la app no mide. El pie de la landing lo aclara y las capturas de la sección «Pantallas» son reales.
