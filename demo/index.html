@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SensorScope – Android sensor monitoring &amp; signal processing (technical demo)</title>
+    <meta
+      name="description"
+      content="Technical demonstration of SensorScope, an offline Android app for real-time sensor acquisition, FFT and local data storage."
+    />
+    <!--
+      Indexación: esta página no se indexa por defecto. Para permitirlo, cambiar
+      el contenido a "index, follow". noindex no es control de acceso: la página
+      es pública para quien tenga la URL.
+    -->
+    <meta name="robots" content="noindex, follow" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="../icon.png" type="image/png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <span class="brand"><img src="../icon.png" alt="" />SensorScope</span>
+      </header>
+
+      <main>
+        <section class="demo-hero" aria-labelledby="title" style="border-top: 0">
+          <div>
+            <h1 id="title">SensorScope</h1>
+            <p class="subtitle">Android Sensor Monitoring &amp; Signal Processing</p>
+            <p class="lead">
+              A native Android application that reads the phone's motion and magnetic sensors in
+              real time, charts them live, records every measurement on the device and analyses it
+              with incremental statistics and an FFT spectrum. It works entirely offline.
+            </p>
+            <a class="download" href="sensorscope-v1.0.1.apk" download="sensorscope-v1.0.1.apk" type="application/vnd.android.package-archive">
+              Download Android APK
+            </a>
+            <p class="download-meta">
+              Version 1.0.1 · 4.7 MB · Android 7.0 or later · checksum in
+              <a href="#technical-notes">Technical notes</a>
+            </p>
+          </div>
+          <div class="phone">
+            <img
+              src="img/live-thumb.jpg"
+              width="360"
+              height="724"
+              alt="Live accelerometer chart while the phone is shaken: X, Y, Z and magnitude traces with pause, stop and add-marker buttons"
+            />
+          </div>
+        </section>
+
+        <section aria-labelledby="capabilities">
+          <h2 id="capabilities">Technical capabilities</h2>
+          <div class="grid">
+            <div class="card">
+              <h3>Real-time sensor acquisition</h3>
+              <p>
+                Accelerometer, linear acceleration, gyroscope and magnetometer through Android's
+                SensorManager on a dedicated thread, up to the fastest rate the device allows. The
+                effective rate, interval range and jitter are measured from the sensor's own
+                monotonic timestamps.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Batched native bridge and peak-preserving decimation</h3>
+              <p>
+                Samples never cross to the UI one by one: Kotlin groups them into about 15 batches
+                per second and reduces them to min/max pairs per chart pixel, so short spikes stay
+                visible while the chart stays fluid.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Digital signal processing and FFT</h3>
+              <p>
+                Radix-2 FFT written in Kotlin with a Hann window, single-sided amplitude, the three
+                strongest peaks with parabolic interpolation, and resampling when sampling is
+                irregular. Incremental statistics (Welford) and display filters: mean removal,
+                moving average, low-pass and high-pass.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Local data storage</h3>
+              <p>
+                Raw samples are streamed in blocks to a compact binary file per session; metadata,
+                statistics and markers live in SQLite. Sessions cut off by a crash or a reboot are
+                recovered from the file on the next launch.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Analysis workflow</h3>
+              <p>
+                Markers during a measurement, a history of saved sessions, side-by-side comparison
+                of two sessions with percentage changes and overlaid spectra, and CSV export of
+                every original sample through Android's share sheet.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Offline and bilingual</h3>
+              <p>
+                No account, no server and no internet permission. The interface is in Spanish when
+                the phone is set to Spanish and in English for any other language.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="screens">
+          <h2 id="screens">Application screenshots</h2>
+          <p>
+            Authentic screenshots of the app. Select one to enlarge it. The last three were taken
+            with the phone set to Spanish.
+          </p>
+          <div class="gallery">
+            <figure>
+              <button type="button" class="shot-button" data-full="img/live.jpg" data-caption="Live chart while the phone is shaken">
+                <img src="img/live-thumb.jpg" width="360" height="724" loading="lazy" alt="Live accelerometer chart with X, Y, Z and magnitude while the phone is shaken" />
+              </button>
+              <figcaption>Live chart while the phone is shaken</figcaption>
+            </figure>
+            <figure>
+              <button type="button" class="shot-button" data-full="img/markers.jpg" data-caption="A marker drawn on the live chart">
+                <img src="img/markers-thumb.jpg" width="360" height="724" loading="lazy" alt="Live chart with a numbered marker shown as a dashed vertical line and the marker list below" />
+              </button>
+              <figcaption>A marker drawn on the live chart</figcaption>
+            </figure>
+            <figure>
+              <button type="button" class="shot-button" data-full="img/home.jpg" data-caption="Home screen with a summary of the last session">
+                <img src="img/home-thumb.jpg" width="360" height="724" loading="lazy" alt="Home screen with shortcuts and a summary of the last session" />
+              </button>
+              <figcaption>Home screen with the last session</figcaption>
+            </figure>
+            <figure>
+              <button type="button" class="shot-button" data-full="img/sensors.jpg" data-caption="Sensor inventory: available and missing sensors">
+                <img src="img/sensors-thumb.jpg" width="360" height="724" loading="lazy" alt="List of the phone's sensors marked available or not available" />
+              </button>
+              <figcaption>Sensor inventory, including missing sensors</figcaption>
+            </figure>
+            <figure>
+              <button type="button" class="shot-button" data-full="img/spectrum.jpg" data-caption="FFT spectrum while the phone's own vibration motor runs (Spanish interface)">
+                <img src="img/spectrum-thumb.jpg" width="360" height="724" loading="lazy" alt="FFT spectrum with a sharp peak near 174 Hz and the three main frequencies listed" />
+              </button>
+              <figcaption>FFT spectrum while the phone's vibration motor runs</figcaption>
+            </figure>
+            <figure>
+              <button type="button" class="shot-button" data-full="img/session.jpg" data-caption="A saved session with its full chart (Spanish interface)">
+                <img src="img/session-thumb.jpg" width="360" height="724" loading="lazy" alt="Saved session with its full chart and session details" />
+              </button>
+              <figcaption>A saved session with its full chart</figcaption>
+            </figure>
+            <figure>
+              <button type="button" class="shot-button" data-full="img/compare.jpg" data-caption="Two sessions compared (Spanish interface)">
+                <img src="img/compare-thumb.jpg" width="360" height="724" loading="lazy" alt="Comparison table of two sessions with RMS, peak and dominant frequency, and their spectra overlaid" />
+              </button>
+              <figcaption>Two sessions compared</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section aria-labelledby="test">
+          <h2 id="test">How to test the application</h2>
+          <ol class="steps">
+            <li>Download the Android APK with the button above.</li>
+            <li>Open the downloaded file on your Android phone.</li>
+            <li>
+              Follow Android's installation prompts. Android may ask you to allow installing apps
+              from the browser or file manager you used; that permission can be turned off again
+              after installing. Keep Google Play Protect enabled.
+            </li>
+            <li>Launch SensorScope.</li>
+            <li>Try the scenario below.</li>
+          </ol>
+          <p>
+            <strong>Requirements:</strong> Android 7.0 or later. No additional hardware: the app
+            uses the phone's built-in sensors, and which ones exist and how fast they can be read
+            depends on the phone. The app works entirely offline and needs no account.
+          </p>
+        </section>
+
+        <section aria-labelledby="scenario">
+          <h2 id="scenario">Suggested demonstration</h2>
+          <ol class="steps">
+            <li>Open <em>Available sensors</em> to see which sensors your phone has and their declared limits.</li>
+            <li>
+              Open <em>New measurement</em>, choose the accelerometer and the <em>Fastest</em> rate,
+              and start. Move or shake the phone and watch the live chart and the effective
+              sampling rate.
+            </li>
+            <li>Tap <em>Add marker</em> at a moment of interest, then stop the measurement.</li>
+            <li>
+              Review the result: duration, real sampling rate, jitter and statistics per channel.
+              Open <em>Spectrum (FFT)</em>; resting the phone on a running fan or appliance shows a
+              dominant frequency.
+            </li>
+            <li>Open <em>History</em> to reopen the session, compare it with another one or share it as CSV.</li>
+          </ol>
+        </section>
+
+        <section aria-labelledby="architecture">
+          <h2 id="architecture">Technical architecture</h2>
+          <div class="arch" role="img" aria-label="Android sensors feed a Kotlin acquisition layer, which stores raw data locally and sends batched, decimated data through a Capacitor plugin to a React and Ionic interface">
+            <div class="node"><strong>Android sensors</strong><span>SensorManager, sensor timestamps</span></div>
+            <div class="arrow" aria-hidden="true">→</div>
+            <div class="node"><strong>Kotlin acquisition</strong><span>Dedicated thread, ring buffer, rate meter, statistics, filters</span></div>
+            <div class="arrow" aria-hidden="true">→</div>
+            <div class="node"><strong>Local storage</strong><span>Binary sample files and SQLite</span></div>
+          </div>
+          <div class="arch" aria-hidden="true">
+            <div class="node"><strong>DSP</strong><span>FFT and peak detection, on demand</span></div>
+            <div class="arrow">→</div>
+            <div class="node"><strong>Capacitor plugin</strong><span>Batches of decimated points, about 15 per second</span></div>
+            <div class="arrow">→</div>
+            <div class="node"><strong>React + Ionic UI</strong><span>uPlot canvas charts, history, comparison</span></div>
+          </div>
+          <p>
+            Built with Kotlin, Capacitor 8, React 19, TypeScript, Ionic 9 and uPlot. Signal
+            processing, storage and statistics are plain Kotlin classes covered by JVM unit tests;
+            the interface logic has Vitest tests.
+          </p>
+        </section>
+
+        <section aria-labelledby="technical-notes">
+          <h2 id="technical-notes">Technical notes</h2>
+          <div class="table-scroll">
+            <table class="specs">
+              <tbody>
+                <tr><th scope="row">Application version</th><td>1.0.1 (version code 2)</td></tr>
+                <tr><th scope="row">Package</th><td class="mono">com.sensorscope.app</td></tr>
+                <tr><th scope="row">Minimum Android version</th><td>Android 7.0 (API 24); targets API 36</td></tr>
+                <tr><th scope="row">APK variant</th><td>Single universal APK (no native libraries)</td></tr>
+                <tr><th scope="row">APK file size</th><td>4,716,134 bytes</td></tr>
+                <tr><th scope="row">SHA-256 (APK)</th><td class="mono">24d00021de12a789cdf768bc03158bdf944921ac4462296fc02703fd8880503c</td></tr>
+                <tr><th scope="row">Signing certificate SHA-256</th><td class="mono">555bf1e9ec7a5d6a27e531f1447c1ef34e40e0083b48c05dcabf148826627e76</td></tr>
+                <tr><th scope="row">Internet</th><td>Not required. The app does not request the internet permission.</td></tr>
+                <tr><th scope="row">Additional hardware</th><td>None. Uses the phone's built-in sensors.</td></tr>
+                <tr>
+                  <th scope="row">Permissions</th>
+                  <td>
+                    <span class="mono">HIGH_SAMPLING_RATE_SENSORS</span>, granted automatically, to read
+                    sensors above 200 Hz on Android 12 and later. The APK also declares an internal,
+                    signature-protected permission added by the AndroidX library, which no other app
+                    can use and which is never shown to the user.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Limitations</th>
+                  <td>
+                    Measurement runs only while the app is on screen. A phone is not a calibrated
+                    instrument: values vary between devices and with how the phone is held or
+                    mounted, and the app must not be used for safety, medical or diagnostic
+                    purposes. Tested mainly on one Android 15 phone.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note">
+            <p>
+              The application is provided for technical evaluation, as is. It has not been
+              independently security-audited. Every saved measurement stays on the device.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>SensorScope · independent technical demonstration.</p>
+        <p>Android is a trademark of Google LLC.</p>
+      </footer>
+    </div>
+
+    <dialog id="lightbox" class="lightbox" aria-label="Enlarged screenshot">
+      <img alt="" />
+      <div class="bar">
+        <span class="caption"></span>
+        <button type="button" data-close aria-label="Close">✕</button>
+      </div>
+    </dialog>
+    <script src="lightbox.js"></script>
+  </body>
+</html>
