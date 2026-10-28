@@ -4,8 +4,8 @@ Punto de control del trabajo, para retomarlo aunque se pierda el contexto. Las i
 
 ## Estado
 
-- **Hecho y probado en local** (2026-10-27), en la rama `demo-page` de este repositorio.
-- **No publicado.** La guía pide no desplegar sin autorización explícita. Publicar = fusionar `demo-page` en `main` y hacer `git push` (ver "Despliegue").
+- **Publicado** el 2026-10-27 en <https://sensorscope.fab-apps.com/demo/>, con autorización del usuario. La rama `demo-page` se fusionó en `main`.
+- El usuario todavía va a consultar a la plataforma si puede incluir el enlace en su proyecto; publicar la página no depende de esa respuesta.
 
 ## Estructura existente (relevada antes de implementar)
 
@@ -61,20 +61,20 @@ No se modificó la landing (`index.html`, `privacy.html`, `styles.css`).
 - Las 7 ampliaciones y el APK responden 200; la ampliación abre y cierra.
 - La landing (`/`) se sigue sirviendo igual.
 
-## Pruebas pendientes (tras publicar)
+## Pruebas sobre el sitio publicado (2026-10-27)
 
-- `curl -I https://sensorscope.fab-apps.com/demo/sensorscope-v1.0.1.apk`: código 200 y `content-type: application/vnd.android.package-archive`.
-- Descargar desde la página publicada y comparar el SHA-256.
+- `/demo` redirige con 301 a `https://sensorscope.fab-apps.com/demo/`; `http://` redirige a `https://`.
+- `/demo/`, sus estilos, el script y las imágenes responden 200; la landing y la política siguen respondiendo 200.
+- `/demo/sensorscope-v1.0.1.apk`: 200, `content-type: application/vnd.android.package-archive`, 4 716 134 bytes, SHA-256 descargado igual al que muestra la página.
+- La página servida contiene `noindex, follow` y ningún `mailto:` ni URL externa.
+
+## Pruebas pendientes
+
 - Abrir la página en el navegador de un teléfono Android, descargar e instalar el APK. **La instalación del APK de release no se probó en un dispositivo**: en el teléfono de pruebas está instalado el build de desarrollo, con otra firma.
 
 ## Despliegue
 
-```bash
-cd githubpages
-git checkout main
-git merge --ff-only demo-page
-git push
-```
+La página se publica con el resto del sitio: cualquier `git push` a `main` de este repositorio la despliega.
 
 Al publicar una versión nueva de la app: copiar el APK como `demo/sensorscope-vX.Y.Z.apk`, borrar el anterior y actualizar en `demo/index.html` el enlace, la versión, el tamaño y los dos SHA-256 (el del certificado solo cambia si cambia la clave, lo que no debe pasar).
 
